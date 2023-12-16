@@ -1,0 +1,8 @@
+node_modules
+.env
+./prompt.md
+Todo.md
+./build
+build
+.env.production
+.env.dev
