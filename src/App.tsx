@@ -24,8 +24,9 @@ const App: React.FC = () => {
   return (
     <Router>
       <div style={background}>
-      <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
         <Navbar/>
+      <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
+
         <Routes>
         <Route path="/view-my-reviews" element={<ViewMyReviews/>} />
           <Route path="/my-reviews" element={<MyReviews/>} />
@@ -36,8 +37,9 @@ const App: React.FC = () => {
           <Route path="/vpn" element={<Vpn/>} />
           <Route path="/verification-steps" element={<VerificationSteps/>} />
         </Routes>
-        <Footer />
         </AptosWalletAdapterProvider>
+
+        <Footer />
       </div>
     </Router>
   );
