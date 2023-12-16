@@ -11,10 +11,8 @@ import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 // import { ApolloProvider } from '@apollo/client';
 import { PetraWallet } from "petra-plugin-wallet-adapter";
-import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
-// import { client } from './graphql/client';
-// import { Provider } from 'react-redux';
-// import store from './store';
+import { AptosWalletAdapterProvider, NetworkName } from "@aptos-labs/wallet-adapter-react";
+// import {IdentityConnectWallet} from "@identity-connect/wallet-adapter-plugin";
 import App from './App';
 
 // const { chains, provider, webSocketProvider } = configureChains(
@@ -45,28 +43,72 @@ const wallets = [new PetraWallet()];
 const rootElement = document.getElementById('root') as HTMLElement;
 
 const root = ReactDOM.createRoot(rootElement);
+
+function walletsForNetwork() {
+  const wallets: any[] = [
+    new PetraWallet(),
+    // new PontemWallet(),
+    // new MartianWallet(),
+    // new FewchaWallet(),
+    // new RiseWallet(),
+    // MSafeWallet,
+    // new NightlyWallet(),
+    // new OpenBlockWallet(),
+    // new TokenPocketWallet(),
+    // new TrustWallet(),
+    // new WelldoneWallet(),
+    // Blocto supports Testnet/Mainnet for now.
+    // new BloctoWallet({
+    //   network: NetworkName.Testnet,
+    //   bloctoAppId: "6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46",
+    // }),
+    // new OKXWallet(),
+  ];
+  // if (network === NetworkName.Mainnet) {
+  //   wallets.unshift(
+  //     new IdentityConnectWallet(IdentityConnectId, {
+  //       networkName: NetworkName.Mainnet,
+  //     }),
+  //   );
+  // } else if (network === NetworkName.Testnet) {
+  //   wallets.unshift(
+  //     new IdentityConnectWallet(IdentityConnectId, {
+  //       networkName: NetworkName.Testnet,
+  //     }),
+  //   );
+  // } else if (network === NetworkName.Devnet) {
+  //   wallets.unshift(
+  //     new IdentityConnectWallet(IdentityConnectId, {
+  //       networkName: NetworkName.Devnet,
+  //     }),
+  //   );
+  // }
+  return wallets;
+}
+
+function ExplorerWalletAdapterProvider({children}: LayoutProps) {
+  // const [state] = useGlobalState();
+  return (
+    <AptosWalletAdapterProvider
+      plugins={walletsForNetwork()}
+      autoConnect={true}
+    >
+      {children}
+    </AptosWalletAdapterProvider>
+  );
+}
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
 root.render(
-  <React.StrictMode>
-    {/* <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider 
-          modalSize="compact" 
-          chains={chains}
-          theme={midnightTheme({
-            accentColor: '#69d685',
-            accentColorForeground: 'black',
-            borderRadius: 'medium',
-            fontStack: 'system',
-            overlayBlur: 'small',
-          })}
-      >
-        <ApolloProvider client={client}>
-          <Provider store={store}> */}
-          <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
-            <App />
-            </AptosWalletAdapterProvider>
-          {/* </Provider>
-        </ApolloProvider>
-      </RainbowKitProvider>
-    </WagmiConfig> */}
-  </React.StrictMode>
+  // <React.StrictMode>
+          // <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
+          //   <App />
+          //   </AptosWalletAdapterProvider>
+          <ExplorerWalletAdapterProvider>
+            <App/>
+          </ExplorerWalletAdapterProvider>
+  // </React.StrictMode>
 );
