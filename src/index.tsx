@@ -10,8 +10,7 @@ import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 // import { ApolloProvider } from '@apollo/client';
-import { PetraWallet } from "petra-plugin-wallet-adapter";
-import { AptosWalletAdapterProvider, NetworkName } from "@aptos-labs/wallet-adapter-react";
+
 // import {IdentityConnectWallet} from "@identity-connect/wallet-adapter-plugin";
 import App from './App';
 
@@ -38,15 +37,15 @@ import App from './App';
 //   webSocketProvider,
 // });
 
-const wallets = [new PetraWallet()];
+
 
 const rootElement = document.getElementById('root') as HTMLElement;
 
 const root = ReactDOM.createRoot(rootElement);
 
-function walletsForNetwork() {
-  const wallets: any[] = [
-    new PetraWallet(),
+// function walletsForNetwork() {
+//   const wallets: any[] = [
+//     new PetraWallet(),
     // new PontemWallet(),
     // new MartianWallet(),
     // new FewchaWallet(),
@@ -63,7 +62,7 @@ function walletsForNetwork() {
     //   bloctoAppId: "6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46",
     // }),
     // new OKXWallet(),
-  ];
+  // ];
   // if (network === NetworkName.Mainnet) {
   //   wallets.unshift(
   //     new IdentityConnectWallet(IdentityConnectId, {
@@ -83,13 +82,13 @@ function walletsForNetwork() {
   //     }),
   //   );
   // }
-  return wallets;
-}
+//   return wallets;
+// }
 
 root.render(
   <React.StrictMode>
-          <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
+          
             <App />
-            </AptosWalletAdapterProvider>
+            
   </React.StrictMode>
 );
