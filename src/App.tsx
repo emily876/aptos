@@ -14,7 +14,7 @@ import VerificationSteps from './pages/Verificationsteps';
 const App: React.FC = () => {
 
   const background = {
-    backgroundColor: '#141a31'
+    backgroundColor: 'white'
   }
   
   return (

@@ -86,29 +86,10 @@ function walletsForNetwork() {
   return wallets;
 }
 
-function ExplorerWalletAdapterProvider({children}: LayoutProps) {
-  // const [state] = useGlobalState();
-  return (
-    <AptosWalletAdapterProvider
-      plugins={walletsForNetwork()}
-      autoConnect={true}
-    >
-      {children}
-    </AptosWalletAdapterProvider>
-  );
-}
-
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
 root.render(
-  // <React.StrictMode>
-          // <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
-          //   <App />
-          //   </AptosWalletAdapterProvider>
-          <ExplorerWalletAdapterProvider>
-            <App/>
-          </ExplorerWalletAdapterProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+          <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
+            <App />
+            </AptosWalletAdapterProvider>
+  </React.StrictMode>
 );
